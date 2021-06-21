@@ -63,7 +63,11 @@ struct CardView: View {
                     if card.isFaceUp {
                         cardContainer.foregroundColor(.white)
                         cardContainer.strokeBorder(gradient, lineWidth: DrawingConstraints.strokeWidth, antialiased: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                        Text(card.content).font(font(using: geometry.size))
+                        Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: 40))
+                            .padding(DrawingConstraints.timerCirclePadding)
+                            .opacity(DrawingConstraints.timerCircleOpacity)
+                        Text(card.content)
+                            .font(font(using: geometry.size))
                     }
                     else {
                         cardContainer
@@ -83,6 +87,9 @@ struct CardView: View {
         static let strokeWidth: CGFloat = 3
         static let gradientOpacity = 0.3
         static let fontScale: CGFloat = 0.7
+        static let timerCirclePadding: CGFloat = 5
+        static let timerCircleOpacity: Double = 0.5
+        
     }
 }
 
