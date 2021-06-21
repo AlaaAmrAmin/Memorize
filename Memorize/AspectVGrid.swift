@@ -19,12 +19,41 @@ struct AspectVGrid<Item, ItemView>: View where Item: Identifiable, ItemView: Vie
     }
     
     var body: some View {
-        let width: CGFloat = 100
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: width))]) {
-            ForEach(items) {
-                content($0).aspectRatio(aspectRatio, contentMode: .fit)
+        GeometryReader { geometry in
+//            VStack {
+                let width: CGFloat = widthThatBestFits(itemsCount: items.count, in: geometry.size, withAspectRatio: aspectRatio)
+                LazyVGrid(columns: [adaptiveGridItem(width: width)], spacing: 0) {
+                    ForEach(items) {
+                        content($0).aspectRatio(aspectRatio, contentMode: .fit)
+                    }
+                }
             }
-        }
+//        }
+    }
+    
+    private func adaptiveGridItem(width: CGFloat) -> GridItem {
+        var gridItem = GridItem(.adaptive(minimum: width))
+        gridItem.spacing = 0
+        return gridItem
+    }
+    
+    private func widthThatBestFits(itemsCount: Int, in size: CGSize, withAspectRatio aspectRatio: CGFloat) -> CGFloat {
+        var numberOfCardsPerRow: CGFloat = 1
+        
+        repeat {
+            let numberOfRows = CGFloat(itemsCount) / numberOfCardsPerRow
+            
+            let itemWidth = size.width / numberOfCardsPerRow
+            let itemHeight = itemWidth / aspectRatio
+            
+            let totalCardsHeight = itemHeight * numberOfRows
+            if totalCardsHeight <= size.height {
+                return itemWidth
+            }
+            numberOfCardsPerRow += 1
+        } while numberOfCardsPerRow < CGFloat(itemsCount)
+        
+        return floor(size.width / numberOfCardsPerRow)
     }
 }
 
