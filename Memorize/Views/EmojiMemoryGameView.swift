@@ -54,38 +54,25 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                let cardContainer = RoundedRectangle(cornerRadius: DrawingConstraints.cornerRadius)
-                if card.isMatched {
-                    cardContainer.opacity(0)
-                }
-                else {
-                    let gradient = LinearGradient(gradient: Gradient(colors: [color.opacity(DrawingConstraints.gradientOpacity), color]), startPoint: .top, endPoint: .bottom)
-                    if card.isFaceUp {
-                        cardContainer.foregroundColor(.white)
-                        cardContainer.strokeBorder(gradient, lineWidth: DrawingConstraints.strokeWidth, antialiased: /*@START_MENU_TOKEN@*/true/*@END_MENU_TOKEN@*/)
-                        Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: 40))
-                            .padding(DrawingConstraints.timerCirclePadding)
-                            .opacity(DrawingConstraints.timerCircleOpacity)
-                        Text(card.content)
-                            .font(font(using: geometry.size))
-                    }
-                    else {
-                        cardContainer
-                            .fill(gradient)
-                    }
-                }
+                Pie(startAngle: Angle(degrees: 270), endAngle: Angle(degrees: 40))
+                    .padding(DrawingConstraints.timerCirclePadding)
+                    .opacity(DrawingConstraints.timerCircleOpacity)
+                Text(card.content)
+                    .rotationEffect(Angle(degrees: card.isMatched ? 360 : 0))
+                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+                    .font(Font.system(size: DrawingConstraints.fontSize))
+                    .scaleEffect(scale(thatFits: geometry.size))
             }
+            .cardify(isFaceUp: card.isFaceUp, color: color)
         }
     }
     
-    private func font(using size: CGSize) -> Font {
-        Font.system(size: min(size.width, size.height) * DrawingConstraints.fontScale)
+    private func scale(thatFits size: CGSize) -> CGFloat {
+        min(size.width, size.height) / (DrawingConstraints.fontSize / DrawingConstraints.fontScale)
     }
-    
+
     private struct DrawingConstraints {
-        static let cornerRadius: CGFloat = 10
-        static let strokeWidth: CGFloat = 3
-        static let gradientOpacity = 0.3
+        static let fontSize: CGFloat = 32
         static let fontScale: CGFloat = 0.7
         static let timerCirclePadding: CGFloat = 5
         static let timerCircleOpacity: Double = 0.5
