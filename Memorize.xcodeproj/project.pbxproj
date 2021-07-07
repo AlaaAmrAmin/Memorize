@@ -20,6 +20,7 @@
 		04D81681266606A7006E280C /* vodafone-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04D8167E266606A7006E280C /* vodafone-bold.ttf */; };
 		04D81682266606A7006E280C /* vodafone-lite.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04D8167F266606A7006E280C /* vodafone-lite.ttf */; };
 		04D81683266606A7006E280C /* vodafone-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04D81680266606A7006E280C /* vodafone-regular.ttf */; };
+		04DCD0462695387300D9BA73 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DCD0452695387300D9BA73 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		04D8167E266606A7006E280C /* vodafone-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "vodafone-bold.ttf"; sourceTree = "<group>"; };
 		04D8167F266606A7006E280C /* vodafone-lite.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "vodafone-lite.ttf"; sourceTree = "<group>"; };
 		04D81680266606A7006E280C /* vodafone-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "vodafone-regular.ttf"; sourceTree = "<group>"; };
+		04DCD0452695387300D9BA73 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				04D81670266603EB006E280C /* EmojiMemoryGameView.swift */,
+				04DCD0452695387300D9BA73 /* CardView.swift */,
 				04180804268011CE003CE0A0 /* AspectVGrid.swift */,
 				0418080826802387003CE0A0 /* Pie.swift */,
 			);
@@ -209,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0424F757267589130014888A /* EmojiMemoryGameViewModel.swift in Sources */,
+				04DCD0462695387300D9BA73 /* CardView.swift in Sources */,
 				0424F754267588820014888A /* MemoryGame.swift in Sources */,
 				0496BA5B268B259F0060C919 /* Cardify.swift in Sources */,
 				04180805268011CE003CE0A0 /* AspectVGrid.swift in Sources */,
